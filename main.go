@@ -21,6 +21,7 @@ func main() {
 	flag.Parse()
 	if challenge != "last" {
 		doChallenge(challenge)
+		return
 	}
 	for _, challenge := range []string{"6a", "6b"} {
 		doChallenge(challenge)

@@ -1,7 +1,7 @@
 package chal6_test
 
 import (
-	chal6 "github.com/nanderv/aoc2024/chal5"
+	"github.com/nanderv/aoc2024/chal6"
 	"github.com/stretchr/testify/assert"
 	"log"
 	"os"
@@ -15,5 +15,5 @@ func TestChal1B(t *testing.T) {
 	}
 	defer fl.Close()
 	res := chal6.Bfunc(fl)
-	assert.Equal(t, 0, res)
+	assert.Equal(t, 6, res)
 }

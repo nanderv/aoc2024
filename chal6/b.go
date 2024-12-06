@@ -7,8 +7,59 @@ import (
 
 func Bfunc(file io.Reader) int {
 	scanner := bufio.NewScanner(file)
-	scanner.Scan()
-	// map of int to list of ints that have to be after it
-	return len(scanner.Bytes())
+	base := make([][]byte, 0)
+	i := 0
+	d := pos{}
+	for scanner.Scan() {
+		ln := scanner.Text()
+		lnn := []byte(ln)
 
+		base = append(base, lnn)
+		for p, l := range lnn {
+			if l == '^' {
+				d.x = p
+				d.y = i
+			}
+		}
+		i++
+	}
+	res := 0
+	for y, _ := range base {
+		for x := range base[y] {
+			pv := base[y][x]
+			base[y][x] = '#'
+
+			if calcLoop(d, base) {
+				res += 1
+			}
+			base[y][x] = pv
+		}
+	}
+	return res
+}
+
+func calcLoop(d pos, base [][]byte) bool {
+	res := 0
+	found := make(map[string]any)
+	res++
+	for {
+		// look ahead
+		dd := d.nextSquare()
+		if dd.y < 0 || dd.x < 0 || dd.y >= len(base) || dd.x >= len(base[dd.y]) {
+			break
+		}
+
+		if base[dd.y][dd.x] == '#' {
+			dd = d.turn()
+		} else {
+			_, ok := found[dd.String2()]
+			if ok {
+				return true
+			}
+			found[dd.String2()] = struct{}{}
+		}
+		d = dd
+	}
+
+	return false
 }
