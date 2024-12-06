@@ -6,6 +6,7 @@ import (
 )
 
 func Bfunc(file io.Reader) int {
+	//debug.SetGCPercent(-1)
 	scanner := bufio.NewScanner(file)
 	base := make([][]byte, 0)
 	i := 0
@@ -30,8 +31,8 @@ func Bfunc(file io.Reader) int {
 
 		pv := base[zz.y][zz.x]
 		base[zz.y][zz.x] = '#'
-
-		if calcLoop(d, base) {
+		dd := zz.prevSquare()
+		if calcLoop(dd, &base) {
 			res += 1
 		}
 		base[zz.y][zz.x] = pv
@@ -40,10 +41,11 @@ func Bfunc(file io.Reader) int {
 	return res
 }
 
-func calcLoop(d pos, base [][]byte) bool {
+func calcLoop(d pos, bs *[][]byte) bool {
+	base := *bs
 	res := 0
-	found := make(map[string]any)
 	res++
+	mp := make([]bool, len(base)*len(base[0])*4)
 	for {
 		// look ahead
 		dd := d.nextSquare()
@@ -54,11 +56,10 @@ func calcLoop(d pos, base [][]byte) bool {
 		if base[dd.y][dd.x] == '#' {
 			dd = d.turn()
 		} else {
-			_, ok := found[dd.String2()]
-			if ok {
+			if mp[dd.GetIntegerHash(len(base))] {
 				return true
 			}
-			found[dd.String2()] = struct{}{}
+			mp[dd.GetIntegerHash(len(base))] = true
 		}
 		d = dd
 	}

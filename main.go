@@ -114,8 +114,6 @@ func main() {
 }
 
 func doChallenge(c chal) {
-
-	fmt.Println(c.file + fileName)
 	fl, err := os.Open(c.file + fileName)
 	if err != nil {
 		log.Fatal(err)

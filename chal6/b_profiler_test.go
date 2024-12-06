@@ -8,12 +8,12 @@ import (
 	"testing"
 )
 
-func TestChal1A(t *testing.T) {
-	fl, err := os.Open("example.txt")
+func TestChal1BProfile(t *testing.T) {
+	fl, err := os.Open("input.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer fl.Close()
-	res := chal6.Afunc(fl)
-	assert.Equal(t, 41, res)
+	res := chal6.Bfunc(fl)
+	assert.Equal(t, 1602, res)
 }
