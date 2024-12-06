@@ -9,73 +9,120 @@ import (
 	"github.com/nanderv/aoc2024/chal4"
 	"github.com/nanderv/aoc2024/chal5"
 	"github.com/nanderv/aoc2024/chal6"
+	"github.com/nanderv/aoc2024/chal7"
+	"io"
 	"log"
 	"os"
+	"time"
 )
 
 const fileName = "/input.txt"
 
+type chal struct {
+	f    func(io.Reader) int
+	file string
+	name string
+}
+
 func main() {
+	challenges := []chal{
+		{
+			name: "1a",
+			f:    chal1.Afunc,
+			file: "chal1",
+		},
+		{
+			name: "1b",
+			f:    chal1.Bfunc,
+			file: "chal1",
+		},
+		{
+			name: "2a",
+			f:    chal2.Afunc,
+			file: "chal2",
+		},
+		{
+			name: "2b",
+			f:    chal2.Bfunc,
+			file: "chal2",
+		},
+		{
+			name: "3a",
+			f:    chal3.Afunc,
+			file: "chal3",
+		},
+		{
+			name: "3b",
+			f:    chal3.Bfunc,
+			file: "chal3",
+		},
+		{
+			name: "4a",
+			f:    chal3.Afunc,
+			file: "chal3",
+		},
+		{
+			name: "4b",
+			f:    chal4.Bfunc,
+			file: "chal4",
+		},
+		{
+			name: "5a",
+			f:    chal5.Afunc,
+			file: "chal5",
+		},
+		{
+			name: "5b",
+			f:    chal5.Bfunc,
+			file: "chal5",
+		},
+		{
+			name: "6a",
+			f:    chal6.Afunc,
+			file: "chal6",
+		},
+		{
+			name: "6b",
+			f:    chal6.Bfunc,
+			file: "chal6",
+		},
+		{
+			name: "7a",
+			f:    chal7.Afunc,
+			file: "chal7",
+		},
+		{
+			name: "7b",
+			f:    chal7.Bfunc,
+			file: "chal7",
+		},
+	}
 	var challenge string
 	flag.StringVar(&challenge, "challenge", "last", "")
 	flag.Parse()
 	if challenge != "last" {
-		doChallenge(challenge)
-		return
+		for _, cc := range challenges {
+			if cc.name == challenge {
+				doChallenge(cc)
+				return
+			}
+		}
 	}
-	for _, challenge := range []string{"6a", "6b"} {
+	for _, challenge := range challenges {
 		doChallenge(challenge)
 	}
 }
 
-func doChallenge(challenge string) {
-	f := chal1.Afunc
-	file := "chal1"
-	switch challenge {
-	case "1a":
-		f = chal1.Afunc
-		file = "chal1"
-	case "1b":
-		f = chal1.Bfunc
-		file = "chal1"
-	case "2a":
-		f = chal2.Afunc
-		file = "chal2"
-	case "2b":
-		f = chal2.Bfunc
-		file = "chal2"
-	case "3a":
-		f = chal3.Afunc
-		file = "chal3"
-	case "3b":
-		f = chal3.Bfunc
-		file = "chal3"
-	case "4a":
-		f = chal4.Afunc
-		file = "chal4"
-	case "4b":
-		f = chal4.Bfunc
-		file = "chal4"
-	case "5a":
-		f = chal5.Afunc
-		file = "chal5"
-	case "5b":
-		f = chal5.Bfunc
-		file = "chal5"
-	case "6a":
-		f = chal6.Afunc
-		file = "chal6"
-	case "6b":
-		f = chal6.Bfunc
-		file = "chal6"
-	}
+func doChallenge(c chal) {
 
-	fmt.Println(file + fileName)
-	fl, err := os.Open(file + fileName)
+	fmt.Println(c.file + fileName)
+	fl, err := os.Open(c.file + fileName)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer fl.Close()
-	res := f(fl)
-	fmt.Println(challenge, res)
+	tm := time.Now()
+	res := c.f(fl)
+
+	fmt.Println(c.name, res, time.Now().Sub(tm))
 }

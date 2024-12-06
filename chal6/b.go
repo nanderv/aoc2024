@@ -24,16 +24,18 @@ func Bfunc(file io.Reader) int {
 		i++
 	}
 	res := 0
-	for y, _ := range base {
-		for x := range base[y] {
-			pv := base[y][x]
-			base[y][x] = '#'
+	path := findPath(d, base)
 
-			if calcLoop(d, base) {
-				res += 1
-			}
-			base[y][x] = pv
+	for _, zz := range path {
+
+		pv := base[zz.y][zz.x]
+		base[zz.y][zz.x] = '#'
+
+		if calcLoop(d, base) {
+			res += 1
 		}
+		base[zz.y][zz.x] = pv
+
 	}
 	return res
 }

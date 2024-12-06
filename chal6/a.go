@@ -59,10 +59,20 @@ func Afunc(file io.Reader) int {
 		}
 		i++
 	}
+	found := findPath(d, base)
+
 	res := 0
-	found := make(map[string]any)
-	found[d.String()] = struct{}{}
-	res++
+
+	for range found {
+		res++
+	}
+
+	return res
+}
+
+func findPath(d pos, base [][]byte) map[string]pos {
+	found := make(map[string]pos)
+	found[d.String()] = d
 	for {
 		// look ahead
 		dd := d.nextSquare()
@@ -73,19 +83,10 @@ func Afunc(file io.Reader) int {
 		if base[dd.y][dd.x] == '#' {
 			dd = d.turn()
 		} else {
-
-			_, ok := found[dd.String()]
-			if !ok {
-				res++
-			}
-			found[dd.String()] = struct{}{}
+			found[dd.String()] = dd
 			base[dd.y][dd.x] = 'X'
 		}
 		d = dd
 	}
-	for _, ln := range base {
-		fmt.Println(string(ln))
-	}
-
-	return res
+	return found
 }

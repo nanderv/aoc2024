@@ -1,4 +1,4 @@
-package chal6_test
+package chal7_test
 
 import (
 	"github.com/nanderv/aoc2024/chal7"
@@ -14,6 +14,6 @@ func TestChal1A(t *testing.T) {
 		log.Fatal(err)
 	}
 	defer fl.Close()
-	res := chal6.Afunc(fl)
+	res := chal7.Afunc(fl)
 	assert.Equal(t, 41, res)
 }
