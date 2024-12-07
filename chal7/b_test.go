@@ -15,5 +15,11 @@ func TestChal1B(t *testing.T) {
 	}
 	defer fl.Close()
 	res := chal7.Bfunc(fl)
-	assert.Equal(t, 6, res)
+	assert.Equal(t, 11387, res)
+
+}
+
+func TestTryop(t *testing.T) {
+
+	assert.True(t, chal7.RecurseOp2(15, []int{6}, 156))
 }

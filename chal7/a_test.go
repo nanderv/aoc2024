@@ -15,5 +15,5 @@ func TestChal1A(t *testing.T) {
 	}
 	defer fl.Close()
 	res := chal7.Afunc(fl)
-	assert.Equal(t, 41, res)
+	assert.Equal(t, 3749, res)
 }
