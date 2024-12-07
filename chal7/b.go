@@ -38,14 +38,15 @@ func RecurseOp2(intermediate int, nextNums []int, expectedResult int) bool {
 	im1 := intermediate + nxt
 	im2 := intermediate * nxt
 	im3, _ := strconv.Atoi(fmt.Sprintf("%d%d", intermediate, nxt))
+
 	if len(nextNums) > 1 {
-		if RecurseOp2(im1, nextNums[1:], expectedResult) {
+		if im1 <= expectedResult && RecurseOp2(im1, nextNums[1:], expectedResult) {
 			return true
 		}
-		if RecurseOp2(im2, nextNums[1:], expectedResult) {
+		if im2 <= expectedResult && RecurseOp2(im2, nextNums[1:], expectedResult) {
 			return true
 		}
-		if RecurseOp2(im3, nextNums[1:], expectedResult) {
+		if im3 <= expectedResult && RecurseOp2(im3, nextNums[1:], expectedResult) {
 			return true
 		}
 		return false

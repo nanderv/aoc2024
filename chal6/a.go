@@ -60,6 +60,7 @@ func (p pos) String2() string {
 func (p pos) GetIntegerHash(sy int) int {
 	return 4*p.y + 4*sy*p.x + p.d
 }
+
 func Afunc(file io.Reader) int {
 	scanner := bufio.NewScanner(file)
 	base := make([][]byte, 0)
@@ -78,15 +79,8 @@ func Afunc(file io.Reader) int {
 		}
 		i++
 	}
-	found := findPath(d, base)
 
-	res := 0
-
-	for range found {
-		res++
-	}
-
-	return res
+	return len(findPath(d, base))
 }
 
 func findPath(d pos, base [][]byte) map[string]pos {
