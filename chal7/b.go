@@ -2,7 +2,6 @@ package chal7
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"strconv"
 	"strings"
@@ -37,8 +36,13 @@ func RecurseOp2(intermediate int, nextNums []int, expectedResult int) bool {
 	nxt := nextNums[0]
 	im1 := intermediate + nxt
 	im2 := intermediate * nxt
-	im3, _ := strconv.Atoi(fmt.Sprintf("%d%d", intermediate, nxt))
-
+	rr := intermediate * 10
+	cter := 10
+	for nxt >= cter {
+		rr *= 10
+		cter *= 10
+	}
+	im3 := rr + nxt
 	if len(nextNums) > 1 {
 		if im1 <= expectedResult && RecurseOp2(im1, nextNums[1:], expectedResult) {
 			return true

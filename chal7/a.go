@@ -35,14 +35,14 @@ func Afunc(file io.Reader) int {
 func recurseOp(intermediate int, nextNums []int, expectedResult int) bool {
 	nxt := nextNums[0]
 	im1 := intermediate + nxt
-	im2 := intermediate * nxt
+	res2 := intermediate * nxt
 	if len(nextNums) > 1 {
 		if recurseOp(im1, nextNums[1:], expectedResult) {
 			return true
 		}
-		if recurseOp(im2, nextNums[1:], expectedResult) {
+		if recurseOp(res2, nextNums[1:], expectedResult) {
 			return true
 		}
 	}
-	return im1 == expectedResult || im2 == expectedResult
+	return im1 == expectedResult || res2 == expectedResult
 }
