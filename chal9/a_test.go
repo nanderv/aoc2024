@@ -1,7 +1,7 @@
-package chal7_test
+package chal9_test
 
 import (
-	"github.com/nanderv/aoc2024/chal7"
+	"github.com/nanderv/aoc2024/chal9"
 	"github.com/stretchr/testify/assert"
 	"log"
 	"os"
@@ -14,6 +14,6 @@ func TestChal1A(t *testing.T) {
 		log.Fatal(err)
 	}
 	defer fl.Close()
-	res := chal7.Afunc(fl)
-	assert.Equal(t, 3749, res)
+	res := chal9.Afunc(fl)
+	assert.Equal(t, 1928, res)
 }
