@@ -11,17 +11,24 @@ type slot struct {
 }
 
 func getEmptySlot(nums []numType, size int) slot {
-	g := emptyGen(nums)
+	ptr := -1
+
 	for {
-		slt := g()
+		for {
+			ptr++
+			if nums[ptr] == numType(-1) {
+				break
+			}
+		}
+
 		sz := 0
-		lp := slt
-		for nums[lp] == numType(-1) && sz < 12 {
+		lp := ptr
+		for nums[ptr] == numType(-1) && sz < 12 {
 			sz++
-			lp++
+			ptr++
 		}
 		if sz >= size {
-			return slot{ptr: slt, size: sz}
+			return slot{ptr: lp, size: sz}
 		}
 	}
 }
