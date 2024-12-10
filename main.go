@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/nanderv/aoc2024/chal1"
+	"github.com/nanderv/aoc2024/chal10"
 	"github.com/nanderv/aoc2024/chal2"
 	"github.com/nanderv/aoc2024/chal3"
 	"github.com/nanderv/aoc2024/chal4"
@@ -117,6 +118,16 @@ func main() {
 			name: "9b",
 			f:    chal9.Bfunc,
 			file: "chal9",
+		},
+		{
+			name: "10a",
+			f:    chal10.Afunc,
+			file: "chal10",
+		},
+		{
+			name: "10b",
+			f:    chal10.Bfunc,
+			file: "chal10",
 		},
 	}
 	var challenge string
