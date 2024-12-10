@@ -2,7 +2,6 @@ package chal10
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 )
 
@@ -46,11 +45,8 @@ func Afunc(file io.Reader) int {
 			}
 		}
 	}
-	fmt.Println(starts)
-	fmt.Println(d)
 	res := 0
 	for _, st := range starts {
-		fmt.Println(st)
 		todo := []pos{st}
 		founds := make(map[pos]struct{})
 
@@ -60,7 +56,6 @@ func Afunc(file io.Reader) int {
 			}
 			nxt := todo[0]
 			if lines[nxt.y][nxt.x] == '9' {
-				fmt.Println(nxt)
 				if _, ok := founds[nxt]; !ok {
 					founds[nxt] = struct{}{}
 					res++

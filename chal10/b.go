@@ -2,7 +2,6 @@ package chal10
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 )
 
@@ -31,19 +30,14 @@ func Bfunc(file io.Reader) int {
 
 	res := 0
 	for _, st := range starts {
-		fmt.Println(st)
 		todo := []pos{st}
-
 		for {
 			if len(todo) == 0 {
 				break
 			}
 			nxt := todo[0]
 			if lines[nxt.y][nxt.x] == '9' {
-				fmt.Println(nxt)
-
 				res++
-
 			}
 			for _, nb := range nxt.neighbours(d, len(lines[0]), len(lines)) {
 				if lines[nb.y][nb.x]-lines[nxt.y][nxt.x] == 1 {
