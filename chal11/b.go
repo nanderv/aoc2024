@@ -2,7 +2,6 @@ package chal11
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"strconv"
 	"strings"
@@ -21,10 +20,8 @@ func Bfunc(file io.Reader) int {
 	}
 	res := int64(0)
 	ops.Store(76)
-	fmt.Println("START", len(numStr))
 	for _, num := range numStr {
 		res += runAndCount(int64(Must(strconv.ParseInt(num, 10, 32))), 75)
 	}
-	fmt.Println(res)
 	return int(res)
 }

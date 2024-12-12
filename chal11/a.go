@@ -2,7 +2,6 @@ package chal11
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"math"
 	"strconv"
@@ -34,12 +33,10 @@ func Afunc(file io.Reader) int {
 		numStr = append(numStr, strings.Fields(scanner.Text())...)
 	}
 	res := int64(0)
-	fmt.Println(len(numStr))
 	ops.Store(25)
 	for _, num := range numStr {
 		res += runAndCount(int64(Must(strconv.ParseInt(num, 10, 32))), 25)
 	}
-	fmt.Println(res)
 	return int(res)
 }
 
@@ -53,7 +50,6 @@ func runAndCount(num int64, count int32) int64 {
 	nm := ops.Load()
 
 	if nm > count {
-		fmt.Println(count)
 		ops.Store(count)
 	}
 	if count == 0 {
