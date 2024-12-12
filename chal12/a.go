@@ -31,16 +31,6 @@ func (p pos) add(q pos) pos {
 	return pos{p.x + q.x, p.y + q.y}
 }
 
-func (p pos) neighbours(dirs []pos, maxx, maxy int) []pos {
-	pp := []pos{}
-	for _, d := range dirs {
-		r := p.add(d)
-		if r.x >= 0 && r.y >= 0 && r.x < maxx && r.y < maxy {
-			pp = append(pp, r)
-		}
-	}
-	return pp
-}
 func (p pos) allNeighbours(dirs []pos) []pos {
 	pp := []pos{}
 	for _, d := range dirs {
@@ -60,9 +50,9 @@ func getGroup(mp []string, dirs []pos, start pos) map[pos]struct{} {
 	i := 0
 	for i < len(allNgh) {
 		p := allNgh[i]
-		nb := p.neighbours(dirs, len(mp[0]), len(mp))
+		nb := p.allNeighbours(dirs)
 		for _, n := range nb {
-			if mp[n.y][n.x] == let {
+			if getV(mp, n) == let {
 				if _, ok := found[n]; !ok {
 					found[n] = struct{}{}
 					allNgh = append(allNgh, n)
@@ -100,9 +90,9 @@ func Afunc(file io.Reader) int {
 				for v, _ := range gp {
 					found[v] = struct{}{}
 					p := pos{v.x, v.y}
-					nb := p.neighbours(d, len(mp[0]), len(mp))
+					nb := p.allNeighbours(d)
 					for _, n := range nb {
-						if mp[n.y][n.x] != mp[y][x] {
+						if getV(mp, n) != getV(mp, p) {
 							wls++
 						}
 					}

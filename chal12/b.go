@@ -35,25 +35,28 @@ func Bfunc(file io.Reader) int {
 				wls := 0
 				for p, _ := range gp {
 					found[p] = struct{}{}
-					pV := getV(mp, p)
-					nb := p.allNeighbours(d)
-					for _, n := range nb {
-						vv := getV(mp, n)
-						if vv != pV {
-							if n.y != p.y {
-								// move over x axis
-								m := p.add(pos{x: -1, y: 0})
-								mm := n.add(pos{x: -1, y: 0})
-								if getV(mp, m) != pV || getV(mp, mm) == pV {
+					pValue := getV(mp, p)
+					nbs := p.allNeighbours(d)
+					for _, nb := range nbs {
+						nbV := getV(mp, nb)
+						if nbV != pValue {
+							if nb.y != p.y {
+								// slide over x axis
+								pSlide := p.add(pos{x: -1, y: 0})
+								nbSlide := nb.add(pos{x: -1, y: 0})
+								// first condition is : if one to the left is same value, it's same wall
+								// second condition is: inner corner check
+								if getV(mp, pSlide) != pValue || getV(mp, nbSlide) == pValue {
 									wls++
 								}
 							}
-							if n.x != p.x {
-								// move over y axis
-
-								m := p.add(pos{x: 0, y: -1})
-								mm := n.add(pos{x: 0, y: -1})
-								if getV(mp, m) != pV || getV(mp, mm) == pV {
+							if nb.x != p.x {
+								// slide over y axis
+								pSlide := p.add(pos{x: 0, y: -1})
+								nbSlide := nb.add(pos{x: 0, y: -1})
+								// first condition is : if one upwards is same value, it's same wall
+								// second condition is: inner corner check
+								if getV(mp, pSlide) != pValue || getV(mp, nbSlide) == pValue {
 									wls++
 								}
 							}
