@@ -87,17 +87,16 @@ func Afunc(file io.Reader) int {
 				gp := getGroup(mp, d, pos{x, y})
 				area := len(gp)
 				wls := 0
-				for v, _ := range gp {
-					found[v] = struct{}{}
-					p := pos{v.x, v.y}
-					nb := p.allNeighbours(d)
-					for _, n := range nb {
-						if getV(mp, n) != getV(mp, p) {
+				for p, _ := range gp {
+					found[p] = struct{}{}
+					nbs := p.allNeighbours(d)
+					for _, nb := range nbs {
+						if getV(mp, nb) != getV(mp, p) {
 							wls++
 						}
 					}
-					if len(nb) < 4 {
-						wls += 4 - len(nb)
+					if len(nbs) < 4 {
+						wls += 4 - len(nbs)
 					}
 				}
 				res += wls * area
