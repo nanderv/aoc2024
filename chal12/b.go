@@ -67,5 +67,5 @@ func Bfunc(file io.Reader) int {
 			}
 		}
 	}
-	return int(res)
+	return res
 }
