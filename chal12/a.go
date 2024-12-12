@@ -41,6 +41,14 @@ func (p pos) neighbours(dirs []pos, maxx, maxy int) []pos {
 	}
 	return pp
 }
+func (p pos) allNeighbours(dirs []pos) []pos {
+	pp := []pos{}
+	for _, d := range dirs {
+		r := p.add(d)
+		pp = append(pp, r)
+	}
+	return pp
+}
 
 func getGroup(mp []string, dirs []pos, start pos) map[pos]struct{} {
 	let := mp[start.y][start.x]

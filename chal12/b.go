@@ -5,6 +5,12 @@ import (
 	"io"
 )
 
+func getV(mp []string, p pos) byte {
+	if p.x < 0 || p.y < 0 || p.x >= len(mp[0]) || p.y >= len(mp) {
+		return '$'
+	}
+	return mp[p.y][p.x]
+}
 func Bfunc(file io.Reader) int {
 	d := []pos{
 		{x: 1, y: 0},
@@ -27,17 +33,31 @@ func Bfunc(file io.Reader) int {
 				gp := getGroup(mp, d, pos{x, y})
 				area := len(gp)
 				wls := 0
-				for v, _ := range gp {
-					found[v] = struct{}{}
-					p := pos{v.x, v.y}
-					nb := p.neighbours(d, len(mp[0]), len(mp))
+				for p, _ := range gp {
+					found[p] = struct{}{}
+					pV := getV(mp, p)
+					nb := p.allNeighbours(d)
 					for _, n := range nb {
-						if mp[n.y][n.x] != mp[y][x] {
-							wls++
+						vv := getV(mp, n)
+						if vv != pV {
+							if n.y != p.y {
+								// move over x axis
+								m := p.add(pos{x: -1, y: 0})
+								mm := n.add(pos{x: -1, y: 0})
+								if getV(mp, m) != pV || getV(mp, mm) == pV {
+									wls++
+								}
+							}
+							if n.x != p.x {
+								// move over y axis
+
+								m := p.add(pos{x: 0, y: -1})
+								mm := n.add(pos{x: 0, y: -1})
+								if getV(mp, m) != pV || getV(mp, mm) == pV {
+									wls++
+								}
+							}
 						}
-					}
-					if len(nb) < 4 {
-						wls += 4 - len(nb)
 					}
 				}
 				res += wls * area
