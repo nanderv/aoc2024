@@ -21,6 +21,7 @@ func (p pos) mul(n int) pos {
 func (p pos) eq(q pos) bool {
 	return p.x == q.x && p.y == q.y
 }
+
 func Afunc(file io.Reader) int {
 	res := 0
 	scanner := bufio.NewScanner(file)
