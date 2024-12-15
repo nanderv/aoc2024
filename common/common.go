@@ -8,7 +8,12 @@ type Pos struct {
 func (p Pos) Add(q Pos) Pos {
 	return Pos{p.X + q.X, p.Y + q.Y}
 }
-
+func (p Pos) DirMul(q Pos) Pos {
+	return Pos{X: p.X * q.X, Y: p.Y * q.Y}
+}
+func (p Pos) Len() int {
+	return p.X + p.Y
+}
 func (p Pos) Mul(n int) Pos {
 	return Pos{p.X * n, p.Y * n}
 }
