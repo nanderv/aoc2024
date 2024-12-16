@@ -46,7 +46,7 @@ func (m *MiMap[T]) Set(a T) {
 func NewMiMap[T any](f func(T) int) MiMap[T] {
 	return MiMap[T]{m: make(map[int]T), f: f}
 }
-func (r *robot) Pos() common.Pos {
+func (r robot) Pos() common.Pos {
 	return r.p
 }
 
@@ -55,12 +55,12 @@ func (r robot) PosHash() int {
 }
 
 // new robot, allowed to move there, end
-func (r *robot) Fwd(mp [][]byte) (robot, bool, bool) {
+func (r robot) Fwd(mp [][]byte) (robot, bool, bool) {
 	res := robot{
 		p:     r.p,
 		d:     r.d,
 		score: r.score,
-		prev:  r,
+		prev:  &r,
 	}
 	d := []common.Pos{{X: 1}, {Y: 1}, {X: -1}, {Y: -1}}
 	pp := r.p.Add(d[r.d])
@@ -76,12 +76,12 @@ func (r *robot) Fwd(mp [][]byte) (robot, bool, bool) {
 	return res, true, false
 }
 
-func (r *robot) Right(mp [][]byte) robot {
+func (r robot) Right(mp [][]byte) robot {
 	res := robot{
 		p:     r.p,
 		d:     r.d,
 		score: r.score,
-		prev:  r,
+		prev:  &r,
 	}
 
 	res.d = (r.d + 1) % 4
@@ -89,12 +89,12 @@ func (r *robot) Right(mp [][]byte) robot {
 	return res
 }
 
-func (r *robot) Left(mp [][]byte) robot {
+func (r robot) Left(mp [][]byte) robot {
 	res := robot{
 		p:     r.p,
 		d:     r.d,
 		score: r.score,
-		prev:  r,
+		prev:  &r,
 	}
 	res.d = (r.d + 3) % 4
 	res.score += 1000
