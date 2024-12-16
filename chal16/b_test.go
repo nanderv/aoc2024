@@ -1,7 +1,7 @@
 package chal16_test
 
 import (
-	"github.com/nanderv/aoc2024/chal15"
+	"github.com/nanderv/aoc2024/chal16"
 	"github.com/stretchr/testify/assert"
 	"log"
 	"os"
@@ -14,7 +14,7 @@ func TestChalBSmol2(t *testing.T) {
 		log.Fatal(err)
 	}
 	defer fl.Close()
-	res := chal15.Bfunc(fl)
+	res := chal16.Bfunc(fl)
 	assert.Equal(t, 45, res)
 }
 
@@ -24,6 +24,6 @@ func TestChalBlarger(t *testing.T) {
 		log.Fatal(err)
 	}
 	defer fl.Close()
-	res := chal15.Bfunc(fl)
+	res := chal16.Bfunc(fl)
 	assert.Equal(t, 64, res)
 }

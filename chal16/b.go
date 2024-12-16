@@ -2,9 +2,9 @@ package chal16
 
 import (
 	"bufio"
+	"fmt"
 	"github.com/nanderv/aoc2024/common"
 	"io"
-	"sort"
 )
 
 func Bfunc(file io.Reader) int {
@@ -25,53 +25,56 @@ func Bfunc(file io.Reader) int {
 		mp = append(mp, []byte(line))
 	}
 
+	i, done := getResult(p, mp)
+	if !done {
+		panic("impossible")
+	}
 	found := NewMiMap(robot.Hash)
+	foundTraces := make([]robot, 0)
 	nexts := []robot{{p: p}}
+
 	for len(nexts) > 0 {
-		nxt := nexts[0]
 
+		next := nexts[0]
 		nexts = nexts[1:]
+		if found.Has(next) {
+			if found.Get(next).score < next.score {
+				continue
+			}
+		}
+		found.Set(next)
 
-		nx, ok, done := nxt.Fwd(mp)
+		if next.score > i {
+			continue
+		}
+
+		nx, ok, done := next.Fwd(mp)
 		if done {
-			return nx.score
+			if nx.score == i {
+				foundTraces = append(foundTraces, next)
+			}
+			continue
 		}
 		if ok {
-			if !found.Has(nx) {
-				nexts = append(nexts, nx)
-				found.Set(nx)
-			} else {
-				if found.Get(nx).score > nx.score {
-					nexts = append(nexts, nx)
-					found.Set(nx)
-				}
-			}
+			nexts = append(nexts, *nx)
 		}
 
-		nx = nxt.Right(mp)
-		if !found.Has(nx) {
-			nexts = append(nexts, nx)
-			found.Set(nx)
-		} else {
-			if found.Get(nx).score > nx.score {
-				nexts = append(nexts, nx)
-				found.Set(nx)
-			}
-		}
+		nx2 := next.Right(mp)
+		nexts = append(nexts, *nx2)
 
-		nx = nxt.Left(mp)
-		if !found.Has(nx) {
-			nexts = append(nexts, nx)
-			found.Set(nx)
-		} else {
-			if found.Get(nx).score > nx.score {
-				nexts = append(nexts, nx)
-				found.Set(nx)
-			}
-		}
-		sort.Slice(nexts, func(i, j int) bool {
-			return nexts[i].score < nexts[j].score
-		})
+		nx3 := next.Left(mp)
+		nexts = append(nexts, *nx3)
+
 	}
-	panic("impossible")
+	found = NewMiMap(robot.PosHash)
+	fmt.Println("t", len(foundTraces))
+	for _, rob := range foundTraces {
+		rr := &rob
+		for rr != nil {
+			found.Set(*rr)
+			rr = rr.prev
+		}
+	}
+
+	return found.Len() + 1
 }
