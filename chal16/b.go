@@ -56,23 +56,27 @@ func Bfunc(file io.Reader) int {
 			continue
 		}
 		if ok {
-			nexts = append(nexts, *nx)
+			nexts = append(nexts, nx)
 		}
 
 		nx2 := next.Right(mp)
-		nexts = append(nexts, *nx2)
+		nexts = append(nexts, nx2)
 
 		nx3 := next.Left(mp)
-		nexts = append(nexts, *nx3)
+		nexts = append(nexts, nx3)
 
 	}
 	found = NewMiMap(robot.PosHash)
 	fmt.Println("t", len(foundTraces))
 	for _, rob := range foundTraces {
-		rr := &rob
-		for rr != nil {
-			found.Set(*rr)
-			rr = rr.prev
+		rr := rob
+		for true {
+			found.Set(rr)
+			rz := rr.prev
+			if rz == nil {
+				break
+			}
+			rr = *rz
 		}
 	}
 

@@ -55,7 +55,7 @@ func (r robot) PosHash() int {
 }
 
 // new robot, allowed to move there, end
-func (r *robot) Fwd(mp [][]byte) (*robot, bool, bool) {
+func (r *robot) Fwd(mp [][]byte) (robot, bool, bool) {
 	res := robot{
 		p:     r.p,
 		d:     r.d,
@@ -65,18 +65,18 @@ func (r *robot) Fwd(mp [][]byte) (*robot, bool, bool) {
 	d := []common.Pos{{X: 1}, {Y: 1}, {X: -1}, {Y: -1}}
 	pp := r.p.Add(d[r.d])
 	if mp[pp.Y][pp.X] == '#' {
-		return &res, false, false
+		return res, false, false
 	}
 	res.p = pp
 	res.score += 1
 	if mp[pp.Y][pp.X] == 'E' {
-		return &res, true, true
+		return res, true, true
 	}
 
-	return &res, true, false
+	return res, true, false
 }
 
-func (r *robot) Right(mp [][]byte) *robot {
+func (r *robot) Right(mp [][]byte) robot {
 	res := robot{
 		p:     r.p,
 		d:     r.d,
@@ -86,10 +86,10 @@ func (r *robot) Right(mp [][]byte) *robot {
 
 	res.d = (r.d + 1) % 4
 	res.score += 1000
-	return &res
+	return res
 }
 
-func (r *robot) Left(mp [][]byte) *robot {
+func (r *robot) Left(mp [][]byte) robot {
 	res := robot{
 		p:     r.p,
 		d:     r.d,
@@ -98,7 +98,7 @@ func (r *robot) Left(mp [][]byte) *robot {
 	}
 	res.d = (r.d + 3) % 4
 	res.score += 1000
-	return &res
+	return res
 }
 
 func Afunc(file io.Reader) int {
@@ -141,36 +141,36 @@ func getResult(p common.Pos, mp [][]byte) (int, bool) {
 			return nx.score, true
 		}
 		if ok {
-			if !found.Has(*nx) {
-				nexts = append(nexts, *nx)
-				found.Set(*nx)
+			if !found.Has(nx) {
+				nexts = append(nexts, nx)
+				found.Set(nx)
 			} else {
-				if found.Get(*nx).score > nx.score {
-					nexts = append(nexts, *nx)
-					found.Set(*nx)
+				if found.Get(nx).score > nx.score {
+					nexts = append(nexts, nx)
+					found.Set(nx)
 				}
 			}
 		}
 
 		nx = nxt.Right(mp)
-		if !found.Has(*nx) {
-			nexts = append(nexts, *nx)
-			found.Set(*nx)
+		if !found.Has(nx) {
+			nexts = append(nexts, nx)
+			found.Set(nx)
 		} else {
-			if found.Get(*nx).score > nx.score {
-				nexts = append(nexts, *nx)
-				found.Set(*nx)
+			if found.Get(nx).score > nx.score {
+				nexts = append(nexts, nx)
+				found.Set(nx)
 			}
 		}
 
 		nx = nxt.Left(mp)
-		if !found.Has(*nx) {
-			nexts = append(nexts, *nx)
-			found.Set(*nx)
+		if !found.Has(nx) {
+			nexts = append(nexts, nx)
+			found.Set(nx)
 		} else {
-			if found.Get(*nx).score > nx.score {
-				nexts = append(nexts, *nx)
-				found.Set(*nx)
+			if found.Get(nx).score > nx.score {
+				nexts = append(nexts, nx)
+				found.Set(nx)
 			}
 		}
 		sort.Slice(nexts, func(i, j int) bool {
