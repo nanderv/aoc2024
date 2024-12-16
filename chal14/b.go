@@ -28,8 +28,6 @@ func Bfunc(file io.Reader) int {
 		}
 		tr := isTree(robots)
 		if tr {
-			fmt.Println(n)
-
 			common.VisualisePos(pps, fmt.Sprintf("%d.png", n))
 			return n
 		}

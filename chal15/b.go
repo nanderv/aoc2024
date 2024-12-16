@@ -2,7 +2,6 @@ package chal15
 
 import (
 	"bufio"
-	"fmt"
 	"github.com/nanderv/aoc2024/common"
 	"io"
 	"sort"
@@ -179,7 +178,7 @@ func expand(r [][]byte) [][]byte {
 			}
 		}
 		res = append(res, lnn)
-		fmt.Println(string(lnn))
+
 	}
 	return res
 }
