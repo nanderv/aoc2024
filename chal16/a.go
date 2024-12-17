@@ -101,7 +101,7 @@ func (r robot) Left(mp [][]byte) robot {
 	return res
 }
 
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	mp := make([][]byte, 0)
 	p := common.Pos{}

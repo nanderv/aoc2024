@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	lines := make([][]byte, 0)
 	for scanner.Scan() {

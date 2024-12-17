@@ -65,7 +65,7 @@ func getGroup(mp []string, dirs []pos, start pos) map[pos]struct{} {
 	return found
 }
 
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	d := []pos{
 		{x: 1, y: 0},
 		{x: -1, y: 0},

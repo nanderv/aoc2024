@@ -57,7 +57,7 @@ func getFiles(startPt int, nums []numType) func() (slot, bool) {
 		}
 	}
 }
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 
 	scanner.Scan()

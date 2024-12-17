@@ -5,7 +5,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"log"
 	"os"
-	"strings"
 	"testing"
 )
 
@@ -16,18 +15,5 @@ func TestChalExample(t *testing.T) {
 	}
 	defer fl.Close()
 	res := chal17.Afunc(fl)
-	assert.Equal(t, 7036, res)
-}
-
-func TestChalMini(t *testing.T) {
-	str :=
-		`Register A: 0
-Register B: 0
-Register C: 9
-
-Program: 2,6
-`
-
-	res := chal17.Afunc(strings.NewReader(str))
-	assert.Equal(t, 7036, res)
+	assert.Equal(t, "4,6,3,5,6,3,5,2,1,0", res)
 }

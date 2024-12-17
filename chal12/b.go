@@ -11,7 +11,7 @@ func getV(mp []string, p pos) byte {
 	}
 	return mp[p.y][p.x]
 }
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	d := []pos{
 		{x: 1, y: 0},
 		{x: -1, y: 0},

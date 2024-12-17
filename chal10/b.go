@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	d := []pos{
 		{x: 1, y: 0},
 		{x: -1, y: 0},

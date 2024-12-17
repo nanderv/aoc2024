@@ -20,7 +20,7 @@ func (p pos) boinkOver(p2 pos) (res pos) {
 
 const SKIP_CHAR = '.'
 
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	res := 0
 	xs := 0

@@ -29,7 +29,7 @@ import (
 const fileName = "/input.txt"
 
 type chal struct {
-	f    func(io.Reader) int
+	f    func(io.Reader) any
 	file string
 	name string
 }

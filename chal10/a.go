@@ -23,7 +23,7 @@ func (p pos) neighbours(dirs []pos, maxx, maxy int) []pos {
 	}
 	return pp
 }
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	d := []pos{
 		{x: 1, y: 0},
 		{x: -1, y: 0},

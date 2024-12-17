@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	//debug.SetGCPercent(-1)
 	scanner := bufio.NewScanner(file)
 	base := make([][]byte, 0)

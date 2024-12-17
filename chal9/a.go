@@ -61,7 +61,7 @@ func fullGen(startPt int, nums []numType) func() (int, bool) {
 		}
 	}
 }
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 
 	scanner.Scan()

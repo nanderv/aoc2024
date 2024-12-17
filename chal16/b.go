@@ -7,7 +7,7 @@ import (
 	"io"
 )
 
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	mp := make([][]byte, 0)
 	p := common.Pos{}

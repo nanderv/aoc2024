@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 
 	res := 0

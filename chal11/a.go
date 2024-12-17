@@ -24,7 +24,7 @@ func Must[T any](a T, err error) T {
 	}
 	return a
 }
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 
 	scanner := bufio.NewScanner(file)
 	numStr := make([]string, 0)

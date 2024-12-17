@@ -31,7 +31,7 @@ func (r *robot) move(maxX int, maxY int, times int) {
 		r.p = p
 	}
 }
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	scanner.Scan()
 	mapBounds := common.Pos{}
@@ -49,7 +49,6 @@ func Afunc(file io.Reader) int {
 	}
 	xB := (mapBounds.X - 1) / 2
 	yB := (mapBounds.Y - 1) / 2
-	fmt.Println(mapBounds.X, mapBounds.Y, xB, yB)
 	r0 := 0
 	r1 := 0
 	r2 := 0
@@ -79,6 +78,5 @@ func Afunc(file io.Reader) int {
 		}
 		panic("Disco")
 	}
-	fmt.Println(len(robots), r1, r2, r3, r4, r1+r2+r3+r4+r0)
 	return r1 * r2 * r3 * r4
 }

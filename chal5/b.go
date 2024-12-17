@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	// map of int to list of ints that have to be after it
 	afterMap := make(map[int][]int)

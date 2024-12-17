@@ -11,7 +11,7 @@ type robot struct {
 	p common.Pos
 }
 
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	mp := make([][]byte, 0)
 	p := common.Pos{}

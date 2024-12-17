@@ -7,7 +7,7 @@ import (
 	"io"
 )
 
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	scanner.Scan()
 	mapBounds := common.Pos{}

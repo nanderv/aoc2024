@@ -1,27 +1,44 @@
 package chal17
 
 import (
-	"fmt"
+	//"fmt"
+	"github.com/nanderv/aoc2024/chal11"
 	"io"
+	"strconv"
+	"strings"
 )
 
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 	regA, regB, regC, progIn := CreateProgInput(file)
-	regAOrig := regA
-	for i := 0; i < 1000000000; i++ {
-		if i%100000 == 0 {
-			fmt.Println(i)
-		}
-		if i == regAOrig {
+	strProg := strings.Split(progIn, ",")
+	prog := make([]int, 0)
+	for _, pp := range strProg {
+		prog = append(prog, chal11.Must(strconv.Atoi(pp)))
+	}
+	digitsFound := -1
+
+	for i := 0; true; i++ {
+		if i == regA {
 			continue
 		}
+		out, _ := execProgram(progIn, i, regB, regC)
+		nFound := -1
 
-		_, res := execProgram(progIn, i, regB, regC)
-		//fmt.Println(res)
-		//fmt.Println(progIn)
-		//fmt.Println()
-		if res == progIn {
-			return i
+		for j := 0; j < len(out); j++ {
+			if prog[len(prog)-1-j] != out[len(out)-1-j] {
+				break
+			}
+			nFound = j
+		}
+		if nFound > digitsFound {
+			digitsFound = nFound
+			if digitsFound == len(prog)-1 {
+				return i
+			}
+			i = i*8 - 8
+			if i < 0 {
+				i = 0
+			}
 		}
 	}
 	return 0

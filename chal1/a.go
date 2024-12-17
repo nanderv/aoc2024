@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	scanner := bufio.NewScanner(file)
 	leftInput := make([]int, 0)
 	rightInput := make([]int, 0)

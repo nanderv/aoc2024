@@ -10,7 +10,7 @@ import (
 
 var ops atomic.Int32
 
-func Bfunc(file io.Reader) int {
+func Bfunc(file io.Reader) any {
 
 	scanner := bufio.NewScanner(file)
 	numStr := make([]string, 0)

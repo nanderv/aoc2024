@@ -105,12 +105,11 @@ func (r robot) Left(mp [][]byte) robot {
 	return res
 }
 
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	regA, regB, regC, progIn := CreateProgInput(file)
-	out, res := execProgram(progIn, regA, regB, regC)
-	fmt.Println(out)
-	fmt.Println(res)
-	return 0
+	_, res := execProgram(progIn, regA, regB, regC)
+
+	return res
 }
 
 func CreateProgInput(file io.Reader) (int, int, int, string) {

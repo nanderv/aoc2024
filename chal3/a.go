@@ -6,7 +6,7 @@ import (
 	"io"
 )
 
-func Afunc(file io.Reader) int {
+func Afunc(file io.Reader) any {
 	txt, err := io.ReadAll(file)
 	if err != nil {
 		panic(err)
