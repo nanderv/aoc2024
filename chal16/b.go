@@ -29,7 +29,7 @@ func Bfunc(file io.Reader) any {
 	if !done {
 		panic("impossible")
 	}
-	found := NewMiMap(robot.Hash)
+	found := common.NewMiMap(robot.Hash)
 	foundTraces := make([]robot, 0)
 	nexts := []robot{{p: p}}
 
@@ -66,7 +66,7 @@ func Bfunc(file io.Reader) any {
 		nexts = append(nexts, nx3)
 
 	}
-	found = NewMiMap(robot.PosHash)
+	found = common.NewMiMap(robot.PosHash)
 	fmt.Println("t", len(foundTraces))
 	for _, rob := range foundTraces {
 		rr := rob

@@ -18,34 +18,6 @@ func (r robot) Hash() int {
 	return r.p.X*40000 + r.p.Y*4 + r.d
 }
 
-type MiMap[T any] struct {
-	m map[int]T
-	f func(T) int
-}
-
-func (m *MiMap[T]) Len() int {
-	return len(m.m)
-}
-func (m *MiMap[T]) Has(a T) bool {
-	i := m.f(a)
-	_, ok := m.m[i]
-	return ok
-}
-
-func (m *MiMap[T]) Get(a T) T {
-	i := m.f(a)
-
-	return m.m[i]
-}
-func (m *MiMap[T]) Set(a T) {
-	i := m.f(a)
-	m.m[i] = a
-	return
-}
-
-func NewMiMap[T any](f func(T) int) MiMap[T] {
-	return MiMap[T]{m: make(map[int]T), f: f}
-}
 func (r robot) Pos() common.Pos {
 	return r.p
 }
@@ -129,7 +101,7 @@ func Afunc(file io.Reader) any {
 }
 
 func getResult(p common.Pos, mp [][]byte) (int, bool) {
-	found := NewMiMap(robot.Hash)
+	found := common.NewMiMap(robot.Hash)
 	nexts := []robot{{p: p}}
 	for len(nexts) > 0 {
 		nxt := nexts[0]
