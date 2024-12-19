@@ -13,6 +13,7 @@ import (
 	"github.com/nanderv/aoc2024/chal16"
 	"github.com/nanderv/aoc2024/chal17"
 	"github.com/nanderv/aoc2024/chal18"
+	"github.com/nanderv/aoc2024/chal19"
 	"github.com/nanderv/aoc2024/chal2"
 	"github.com/nanderv/aoc2024/chal3"
 	"github.com/nanderv/aoc2024/chal4"
@@ -216,6 +217,16 @@ func main() {
 			name: "18b",
 			f:    chal18.Bfunc,
 			file: "chal18",
+		},
+		{
+			name: "19a",
+			f:    chal19.Afunc,
+			file: "chal19",
+		},
+		{
+			name: "19b",
+			f:    chal19.Bfunc,
+			file: "chal19",
 		},
 	}
 	var challenge string
