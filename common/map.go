@@ -25,6 +25,16 @@ func (m *MiMap[T]) Set(a T) {
 	return
 }
 
+func (m *MiMap[T]) Keys() []T {
+	keys := make([]T, m.Len())
+	i := 0
+	for _, v := range m.m {
+		keys[i] = v
+		i++
+	}
+	return keys
+}
+
 func NewMiMap[T any](f func(T) int) MiMap[T] {
 	return MiMap[T]{m: make(map[int]T), f: f}
 }
