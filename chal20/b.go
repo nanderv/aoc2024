@@ -5,5 +5,5 @@ import (
 )
 
 func Bfunc(file io.Reader) any {
-	return 5
+	return Algo(file, 100, 20)
 }

@@ -14,13 +14,13 @@ func TestChal1A(t *testing.T) {
 		log.Fatal(err)
 	}
 	defer fl.Close()
-	res := chal20.AfuncT(fl, 38)
+	res := chal20.Algo(fl, 38, 2)
 	assert.Equal(t, 3, res)
 	fl, err = os.Open("example.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer fl.Close()
-	res = chal20.AfuncT(fl, 63)
+	res = chal20.Algo(fl, 63, 2)
 	assert.Equal(t, 1, res)
 }
