@@ -2,7 +2,6 @@ package chal21
 
 import (
 	"bufio"
-	"fmt"
 	"github.com/nanderv/aoc2024/common"
 	"io"
 )
@@ -16,7 +15,6 @@ func Bfunc(file io.Reader) any {
 		n := getN(line)
 		in := In(line, numPad, start)
 		res += in * n
-		fmt.Println(line, n, in, in*n)
 	}
 	return res
 }

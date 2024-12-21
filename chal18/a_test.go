@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestChal1A(t *testing.T) {
+func TestChal18A(t *testing.T) {
 	fl, err := os.Open("example.txt")
 	if err != nil {
 		log.Fatal(err)

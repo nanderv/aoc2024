@@ -2,7 +2,6 @@ package chal16
 
 import (
 	"bufio"
-	"fmt"
 	"github.com/nanderv/aoc2024/common"
 	"io"
 )
@@ -67,7 +66,6 @@ func Bfunc(file io.Reader) any {
 
 	}
 	found = common.NewMiMap(robot.PosHash)
-	fmt.Println("t", len(foundTraces))
 	for _, rob := range foundTraces {
 		rr := rob
 		for true {

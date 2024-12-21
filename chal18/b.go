@@ -28,23 +28,35 @@ func Bfunc(file io.Reader) any {
 		fallingMemory = append(fallingMemory, common.Pos{X: x, Y: y})
 	}
 
-	mp := common.NewMiMap(HashNode(size.X))
-
-	ls := []node{{Pos: common.Pos{X: 0, Y: 0}, dist: 0}}
-
+	mp := common.NewMiMap(HashNoded(size.X))
 	for i := 0; i < len(fallingMemory); i++ {
-		mp.Set(fallingMemory[i])
-		r := sim(size, ls, mp)
+		mp.Set(Node{Pos: fallingMemory[i], dist: i + 1})
+	}
+	low := 0
+	high := len(fallingMemory) - 1
+	for high-low > 1 {
+
+		mid := (low + high) / 2
+
+		ls := []Node{{Pos: common.Pos{X: 0, Y: 0}, dist: 0}}
+
+		r := sim(size, ls, mp, mid)
 		if r == -1 {
-			return fmt.Sprintf("%d,%d", fallingMemory[i].X, fallingMemory[i].Y)
+			if low == mid {
+				return fmt.Sprintf("%d,%d", fallingMemory[low].X, fallingMemory[low].Y)
+			}
+			high = mid
+		} else {
+			low = mid
 		}
 	}
-	panic("Impossible")
+	return fmt.Sprintf("%d,%d", fallingMemory[low].X, fallingMemory[low].Y)
+
 }
 
-func sim(size common.Pos, ls []node, mp common.MiMap[common.Pos]) int {
+func sim(size common.Pos, ls []Node, mp common.MiMap[Node], dist int) int {
 	visited := common.NewMiMap(HashNode(size.X))
-
+	wr := Wrapped{l: mp, i: dist}
 	for len(ls) > 0 {
 
 		l := ls[0]
@@ -52,7 +64,7 @@ func sim(size common.Pos, ls []node, mp common.MiMap[common.Pos]) int {
 		if l.X == size.X-1 && l.Y == size.Y-1 {
 			return l.dist
 		}
-		nbs := l.NB(size, &mp)
+		nbs := l.NB(size, &wr)
 		for _, nb := range nbs {
 			m := l.Move(nb)
 			if !visited.Has(m.Pos) {
