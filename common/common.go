@@ -5,6 +5,10 @@ type Pos struct {
 	Y int
 }
 
+func (p Pos) Sub(q Pos) Pos {
+	return Pos{p.X - q.X, p.Y - q.Y}
+}
+
 func (p Pos) Add(q Pos) Pos {
 	return Pos{p.X + q.X, p.Y + q.Y}
 }

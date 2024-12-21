@@ -38,3 +38,42 @@ func (m *MiMap[T]) Keys() []T {
 func NewMiMap[T any](f func(T) int) MiMap[T] {
 	return MiMap[T]{m: make(map[int]T), f: f}
 }
+
+type SlowMiMap[T any] struct {
+	m map[string]T
+	f func(T) string
+}
+
+func (m *SlowMiMap[T]) Len() int {
+	return len(m.m)
+}
+func (m *SlowMiMap[T]) Has(a T) bool {
+	i := m.f(a)
+	_, ok := m.m[i]
+	return ok
+}
+
+func (m *SlowMiMap[T]) Get(a T) T {
+	i := m.f(a)
+
+	return m.m[i]
+}
+func (m *SlowMiMap[T]) Set(a T) {
+	i := m.f(a)
+	m.m[i] = a
+	return
+}
+
+func (m *SlowMiMap[T]) Keys() []T {
+	keys := make([]T, m.Len())
+	i := 0
+	for _, v := range m.m {
+		keys[i] = v
+		i++
+	}
+	return keys
+}
+
+func NewSlowMiMap[T any](f func(T) string) SlowMiMap[T] {
+	return SlowMiMap[T]{m: make(map[string]T), f: f}
+}
