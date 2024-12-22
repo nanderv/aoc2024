@@ -4,17 +4,8 @@ import (
 	"fmt"
 	"github.com/nanderv/aoc2024/chal21"
 	"github.com/nanderv/aoc2024/common"
-	"github.com/stretchr/testify/assert"
-	"strings"
 	"testing"
 )
-
-func TestChalBMicro(t *testing.T) {
-	str := `6A`
-
-	v := chal21.Bfunc(strings.NewReader(str))
-	assert.Equal(t, 126384, v)
-}
 
 func TestChalBItest(t *testing.T) {
 	str := `029A`

@@ -14,6 +14,11 @@ func (m *MiMap[T]) Has(a T) bool {
 	return ok
 }
 
+func (m *MiMap[T]) MGet(a T) (T, bool) {
+	i := m.f(a)
+	v, ok := m.m[i]
+	return v, ok
+}
 func (m *MiMap[T]) Get(a T) T {
 	i := m.f(a)
 
@@ -36,7 +41,7 @@ func (m *MiMap[T]) Keys() []T {
 }
 
 func NewMiMap[T any](f func(T) int) MiMap[T] {
-	return MiMap[T]{m: make(map[int]T), f: f}
+	return MiMap[T]{m: make(map[int]T, 4000), f: f}
 }
 
 type SlowMiMap[T any] struct {
